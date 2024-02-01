@@ -1,0 +1,1 @@
+{fbvElement type="select" id="authors" name="authors" from=$authors translate="0" size=$fbvStyles.size.MEDIUM}
