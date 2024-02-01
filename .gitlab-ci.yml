@@ -1,0 +1,10 @@
+variables:
+    PLUGIN_NAME: 'customSearchFilters'
+    
+include:
+  - project: 'documentacao-e-tarefas/modelosparaintegracaocontinua'
+    ref: main
+    file:
+      - 'templates/groups/pkp_plugin.yml'
+      - 'templates/groups/ojs_3_4_plugins_cypress_tests_model.yml'
+
