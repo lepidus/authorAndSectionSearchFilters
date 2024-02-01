@@ -1,5 +1,5 @@
 describe('Custom Search Filters - Authors filter replacement', function () {
-    const expectedAuthorsCount = 19;
+    const expectedAuthorsCount = 4;
     const expectedAuthors = ["Vajiheh Karbasizaed", "Alan Mwandenga"];
 
     it('New field should be a dropdown list of authors', function () {

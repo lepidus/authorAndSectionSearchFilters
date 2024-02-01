@@ -7,6 +7,7 @@ use PKP\plugins\GenericPlugin;
 use APP\core\Application;
 use APP\facades\Repo;
 use PKP\security\Role;
+use APP\submission\Submission;
 
 class CustomSearchFiltersPlugin extends GenericPlugin
 {
@@ -66,21 +67,32 @@ class CustomSearchFiltersPlugin extends GenericPlugin
         return $output;
     }
 
-    public function loadAuthors(): array
+    private function loadAuthors(): array
     {
         $context = Application::get()->getRequest()->getContext();
 
-        $authorNames = ['' => ''];
-        $authors = Repo::user()->getCollector()
+        $authors = Repo::author()->getCollector()
             ->filterByContextIds([$context->getId()])
-            ->filterByRoleIds([Role::ROLE_ID_AUTHOR])
             ->getMany();
+
+        return $this->filterContributingAuthors($authors);
+    }
+
+    private function filterContributingAuthors(\Illuminate\Support\LazyCollection $authors): array
+    {
+        $authorNames = ['' => ''];
 
         foreach ($authors as $author) {
             $fullName = $author->getFullName();
-            $authorNames[$fullName] = $fullName;
-        }
 
+            if (!isset($authorNames[$fullName])) {
+                $publication = Repo::publication()->get($author->getData('publicationId'));
+
+                if ($publication->getData('status') == Submission::STATUS_PUBLISHED) {
+                    $authorNames[$fullName] = $fullName;
+                }
+            }
+        }
         return $authorNames;
     }
 }
