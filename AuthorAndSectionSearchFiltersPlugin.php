@@ -23,6 +23,7 @@ class AuthorAndSectionSearchFiltersPlugin extends GenericPlugin
         if ($success && $this->getEnabled($mainContextId)) {
             Hook::add('TemplateManager::display', [$this, 'replaceAuthorsFilter']);
             Hook::add('Templates::Search::SearchResults::AdditionalFilters', [$this, 'createSectionsSearchFilter']);
+            Hook::add('LoadHandler', [$this, 'replaceSearchHandler']);
         }
 
         return $success;
@@ -127,5 +128,15 @@ class AuthorAndSectionSearchFiltersPlugin extends GenericPlugin
         }
 
         return $sectionsTitles;
+    }
+
+    public function replaceSearchHandler($hookName, $params)
+    {
+        $page = $params[0];
+        if ($page === 'search') {
+            define('HANDLER_CLASS', 'APP\plugins\generic\authorAndSectionSearchFilters\classes\SectionFilterSearchHandler');
+            return true;
+        }
+        return false;
     }
 }
