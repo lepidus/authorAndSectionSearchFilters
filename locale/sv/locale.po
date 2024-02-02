@@ -11,8 +11,8 @@ msgstr ""
 "PO-Revision-Date: 2022-05-27T08:00:00+02:00\n"
 "Language: Swedish\n"
 
-msgid "plugins.generic.customSearchFilters.displayName"
-msgstr "Anpassade sökfilter"
+msgid "plugins.generic.authorAndSectionSearchFilters.displayName"
+msgstr "Sökfilter för författare och avsnitt"
 
-msgid "plugins.generic.customSearchFilters.description"
-msgstr "Lägger till/ändrar specifika avancerade filter till OJS-sökning"
+msgid "plugins.generic.authorAndSectionSearchFilters.description"
+msgstr "Lägger till/ändrar avancerade filter efter författare och avsnitt i OJS-sökningen"

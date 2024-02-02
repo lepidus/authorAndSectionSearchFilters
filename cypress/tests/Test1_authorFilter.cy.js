@@ -1,8 +1,8 @@
-describe('Custom Search Filters - Authors filter replacement', function () {
+describe('Author and Section Search Filters - Authors filter replacement', function () {
     const expectedAuthorsCount = 4;
     const expectedAuthors = ["Vajiheh Karbasizaed", "Alan Mwandenga"];
 
-    it('New field should be a dropdown list of authors', function () {
+    it('Field should be a dropdown list of authors', function () {
         cy.visit('publicknowledge/search');
         cy.get('#authors').should('be.visible').and('have.prop', 'tagName', 'SELECT');
         cy.get('#authors').should('have.value', '');

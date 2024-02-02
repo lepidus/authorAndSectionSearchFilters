@@ -11,8 +11,8 @@ msgstr ""
 "PO-Revision-Date: 2022-05-27T08:00:00+02:00\n"
 "Language: Português (Brasil)\n"
 
-msgid "plugins.generic.customSearchFilters.displayName"
-msgstr "Filtros de Busca Personalizados"
+msgid "plugins.generic.authorAndSectionSearchFilters.displayName"
+msgstr "Filtros de Autor e Seção na busca"
 
 msgid "plugins.generic.customSearchFilters.description"
-msgstr "Adiciona/modifica filtros de pesquisa específicos na busca do OJS"
+msgstr "Adiciona/modifica filtros avançados por autor e por seção na busca do OJS"

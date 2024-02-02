@@ -1,5 +1,5 @@
-describe('Plugin setup of Custom Search Filters Plugin', function () {
-    it('Enables Custom Search Filters plugin', function () {
+describe('Plugin setup of Author and Section Search Filters Plugin', function () {
+    it('Enables Author and Section Search Filters plugin', function () {
 		cy.login('dbarnes', null, 'publicknowledge');
 
 		cy.contains('a', 'Website').click();
@@ -7,7 +7,7 @@ describe('Plugin setup of Custom Search Filters Plugin', function () {
 		cy.waitJQuery();
 		cy.get('#plugins-button').click();
 
-		cy.get('input[id^=select-cell-customsearchfiltersplugin]').check();
-		cy.get('input[id^=select-cell-customsearchfiltersplugin]').should('be.checked');
+		cy.get('input[id^=select-cell-authorandsectionsearchfiltersplugin]').check();
+		cy.get('input[id^=select-cell-authorandsectionsearchfiltersplugin]').should('be.checked');
     });
 });

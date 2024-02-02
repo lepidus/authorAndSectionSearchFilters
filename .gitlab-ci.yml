@@ -1,5 +1,5 @@
 variables:
-    PLUGIN_NAME: 'customSearchFilters'
+    PLUGIN_NAME: 'authorAndSectionSearchFilters'
     
 include:
   - project: 'documentacao-e-tarefas/modelosparaintegracaocontinua'

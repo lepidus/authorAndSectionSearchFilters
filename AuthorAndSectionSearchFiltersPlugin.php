@@ -1,6 +1,6 @@
 <?php
 
-namespace APP\plugins\generic\customSearchFilters;
+namespace APP\plugins\generic\authorAndSectionSearchFilters;
 
 use PKP\plugins\Hook;
 use PKP\plugins\GenericPlugin;
@@ -9,7 +9,7 @@ use APP\facades\Repo;
 use PKP\security\Role;
 use APP\submission\Submission;
 
-class CustomSearchFiltersPlugin extends GenericPlugin
+class AuthorAndSectionSearchFiltersPlugin extends GenericPlugin
 {
     public function register($category, $path, $mainContextId = null)
     {
@@ -28,12 +28,12 @@ class CustomSearchFiltersPlugin extends GenericPlugin
 
     public function getDisplayName()
     {
-        return __('plugins.generic.customSearchFilters.displayName');
+        return __('plugins.generic.authorAndSectionSearchFilters.displayName');
     }
 
     public function getDescription()
     {
-        return __('plugins.generic.customSearchFilters.description');
+        return __('plugins.generic.authorAndSectionSearchFilters.description');
     }
 
     public function replaceAuthorsFilter($hookName, $params)

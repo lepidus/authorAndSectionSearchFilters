@@ -10,10 +10,10 @@ https://www.gnu.org/licenses/gpl-3.0.txt.
 -->
 
 <version>
-    <application>customSearchFilters</application>
+    <application>authorAndSectionSearchFilters</application>
     <type>plugins.generic</type>
     <release>0.1.0.0</release>
     <date>2024-02-01</date>
     <lazy-load>0</lazy-load>
-    <class>CustomSearchFiltersPlugin</class>
+    <class>AuthorAndSectionSearchFiltersPlugin</class>
 </version>

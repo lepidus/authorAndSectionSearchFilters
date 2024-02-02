@@ -1,4 +1,4 @@
-# Custom Search Filters Plugin
+# Author and Section Search Filters Plugin
 
 This plugin adds specific advanced filters to OJS search, giving users the ability to filter by a selected Author from a list of authors that contributed to the journal.
 
@@ -17,7 +17,7 @@ To download the plugin, go to the Releases page and download the tar.gz package 
 Enter the administration area of ​​your OJS website through the Dashboard.
 Navigate to `Settings` > `Website` > `Plugins` > `Upload a new plugin`.
 
-Under Upload file select the file `customSearchFilters.tar.gz`.
+Under Upload file select the file `authorAndSectionSearchFilters.tar.gz`.
 
 Click Save and the plugin will be installed on your website.
 
