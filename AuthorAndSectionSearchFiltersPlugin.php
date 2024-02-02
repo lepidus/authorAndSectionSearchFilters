@@ -7,6 +7,7 @@ use PKP\plugins\GenericPlugin;
 use APP\core\Application;
 use APP\facades\Repo;
 use PKP\security\Role;
+use APP\template\TemplateManager;
 use APP\submission\Submission;
 
 class AuthorAndSectionSearchFiltersPlugin extends GenericPlugin
@@ -21,6 +22,7 @@ class AuthorAndSectionSearchFiltersPlugin extends GenericPlugin
 
         if ($success && $this->getEnabled($mainContextId)) {
             Hook::add('TemplateManager::display', [$this, 'replaceAuthorsFilter']);
+            Hook::add('Templates::Search::SearchResults::AdditionalFilters', [$this, 'createSectionsSearchFilter']);
         }
 
         return $success;
@@ -45,10 +47,14 @@ class AuthorAndSectionSearchFiltersPlugin extends GenericPlugin
             return false;
         }
 
+        $request = Application::get()->getRequest();
+        $styleUrl = $request->getBaseUrl() . '/' . $this->getPluginPath() . '/styles/sectionFilter.css';
+        $templateMgr->addStyleSheet('sectionSearchFilter', $styleUrl, ['contexts' => 'frontend']);
+
         $templateMgr->registerFilter("output", array($this, 'replaceAuthorsInputFieldFilter'));
     }
 
-    public function replaceAuthorsInputFieldFilter($output, $templateMgr)
+    public function replaceAuthorsInputFieldFilter($output, $templateMgr): string
     {
         $pattern = '/<input type="text" id="authors" [^>]+>/';
 
@@ -94,5 +100,32 @@ class AuthorAndSectionSearchFiltersPlugin extends GenericPlugin
             }
         }
         return $authorNames;
+    }
+
+    public function createSectionsSearchFilter($hookName, $params): bool
+    {
+        $templateMgr = $params[1];
+        $output = &$params[2];
+
+        $styleUrl = Application::get()->getRequest()->getBaseUrl() . '/' . $this->getPluginPath() . '/styles/sectionFilter.css';
+        $templateMgr->addStyleSheet('sectionSearchFilter', $styleUrl, ['contexts' => 'frontend']);
+
+        $templateMgr->assign('sections', $this->loadSections());
+        $output .= $templateMgr->fetch($this->getTemplateResource('sectionSearchFilter.tpl'));
+
+        return false;
+    }
+
+    private function loadSections(): array
+    {
+        $contextId = Application::get()->getRequest()->getContext()->getId();
+        $sections = Repo::section()->getSectionList($contextId, true);
+
+        $sectionsTitles = ['' => ''];
+        foreach ($sections as $section) {
+            $sectionsTitles[$section['id']] = $section['title'];
+        }
+
+        return $sectionsTitles;
     }
 }
