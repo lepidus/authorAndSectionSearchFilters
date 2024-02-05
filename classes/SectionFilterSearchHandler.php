@@ -2,11 +2,10 @@
 
 namespace APP\plugins\generic\authorAndSectionSearchFilters\classes;
 
-use APP\search\ArticleSearch;
 use APP\template\TemplateManager;
 use APP\facades\Repo;
-use PKP\core\VirtualArrayIterator;
 use APP\pages\search\SearchHandler;
+use APP\plugins\generic\authorAndSectionSearchFilters\classes\ArticleSearchBySection;
 
 class SectionFilterSearchHandler extends SearchHandler
 {
@@ -18,18 +17,14 @@ class SectionFilterSearchHandler extends SearchHandler
 
     public function search($args, $request)
     {
-
         $this->validate(null, $request);
 
-        // Get and transform active filters.
-        $articleSearch = new ArticleSearch();
+        $articleSearch = new ArticleSearchBySection();
         $searchFilters = $articleSearch->getSearchFilters($request);
         $keywords = $articleSearch->getKeywordsFromSearchFilters($searchFilters);
 
-        // Get the range info.
         $rangeInfo = $this->getRangeInfo($request, 'search');
 
-        // Retrieve results.
         $error = '';
         $results = $articleSearch->retrieveResults(
             $request,
@@ -40,11 +35,6 @@ class SectionFilterSearchHandler extends SearchHandler
             $searchFilters['toDate'],
             $rangeInfo
         );
-
-        $sectionId = $request->getUserVar('sections');
-        if ($sectionId) {
-            $results = $this->filterResultsBySection($results, $sectionId);
-        }
 
         $this->setupTemplate($request);
 
@@ -75,22 +65,5 @@ class SectionFilterSearchHandler extends SearchHandler
         }
 
         $templateMgr->display('frontend/pages/search.tpl');
-    }
-
-    private function filterResultsBySection($results, $sectionId)
-    {
-        $filteredResults = [];
-
-        while ($item = $results->next()) {
-            $submission = $item['article'];
-
-            if ($submission->getSectionId() == $sectionId) {
-                $filteredResults[] = $item;
-            }
-        }
-
-        $newResults = new VirtualArrayIterator($filteredResults, count($filteredResults), $results->page, $results->itemsPerPage);
-
-        return $newResults;
     }
 }
