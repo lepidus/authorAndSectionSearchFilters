@@ -37,7 +37,7 @@ class ArticleSearchBySection extends ArticleSearch
             $sectionId = $request->getUserVar('sections');
 
             $mergedResults = [];
-            if ($this->searchingForSomething($keywords)) {
+            if (!empty($keywords) && $this->searchingForSomething($keywords)) {
                 $mergedResults = $this->_getMergedArray($context, $keywords, $publishedFrom, $publishedTo);
                 if ($sectionId) {
                     $dao = new SearchBySectionDAO();
