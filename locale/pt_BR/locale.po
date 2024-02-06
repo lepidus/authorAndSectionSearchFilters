@@ -14,7 +14,7 @@ msgstr ""
 msgid "plugins.generic.authorAndSectionSearchFilters.displayName"
 msgstr "Filtros de Autor e Seção na busca"
 
-msgid "plugins.generic.customSearchFilters.description"
+msgid "plugins.generic.authorAndSectionSearchFilters.description"
 msgstr "Adiciona/modifica filtros avançados por autor e por seção na busca do OJS"
 
 msgid "plugins.generic.authorAndSectionSearchFilters.search.sections"
