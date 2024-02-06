@@ -1,4 +1,4 @@
-describe('Author and Section Search Filters - Authors filter replacement', function () {
+describe('Author search filter replacement', function () {
     const expectedAuthorsCount = 4;
     const expectedAuthors = ["Vajiheh Karbasizaed", "Alan Mwandenga"];
 
@@ -21,12 +21,10 @@ describe('Author and Section Search Filters - Authors filter replacement', funct
         cy.contains('button', 'Search').click();
         cy.contains("The Signalling Theory Dividends");
     });
-    //  TO DO:
-    
-    // it('Keep the value of the filter after search', function () {
-    //     cy.visit('publicknowledge/search');
-    //     cy.get('#authors').select(expectedAuthors[0]);
-    //     cy.contains('button', 'Search').click();
-    //     cy.get('#authors').should('have.value', expectedAuthors[0]);
-    // });
+    it('Keep the value of the filter after search', function () {
+        cy.visit('publicknowledge/search');
+        cy.get('#authors').select(expectedAuthors[0]);
+        cy.contains('button', 'Search').click();
+        cy.get('#authors').should('have.value', expectedAuthors[0]);
+    });
 });

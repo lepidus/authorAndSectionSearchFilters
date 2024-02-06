@@ -50,6 +50,8 @@ class AuthorAndSectionSearchFiltersPlugin extends GenericPlugin
 
         $request = Application::get()->getRequest();
         $styleUrl = $request->getBaseUrl() . '/' . $this->getPluginPath() . '/styles/sectionFilter.css';
+
+        $templateMgr->assign('sections', $request->getUserVar('sections'));
         $templateMgr->addStyleSheet('sectionSearchFilter', $styleUrl, ['contexts' => 'frontend']);
 
         $templateMgr->registerFilter("output", array($this, 'replaceAuthorsInputFieldFilter'));
@@ -63,7 +65,7 @@ class AuthorAndSectionSearchFiltersPlugin extends GenericPlugin
             $match = $matches[0][0];
             $offset = $matches[0][1];
 
-            $templateMgr->assign('authors', $this->loadAuthors());
+            $templateMgr->assign('authorsList', $this->loadAuthors());
             $newOutput = substr($output, 0, $offset);
             $newOutput .= $templateMgr->fetch($this->getTemplateResource('newAuthorsFilter.tpl'));
             $newOutput .= substr($output, $offset + strlen($match));
@@ -87,7 +89,7 @@ class AuthorAndSectionSearchFiltersPlugin extends GenericPlugin
 
     private function filterContributingAuthors(\Illuminate\Support\LazyCollection $authors): array
     {
-        $authorNames = ['' => ''];
+        $authorNames = [];
 
         foreach ($authors as $author) {
             $fullName = $author->getFullName();
@@ -100,6 +102,7 @@ class AuthorAndSectionSearchFiltersPlugin extends GenericPlugin
                 }
             }
         }
+        ksort($authorNames);
         return $authorNames;
     }
 
@@ -111,7 +114,7 @@ class AuthorAndSectionSearchFiltersPlugin extends GenericPlugin
         $styleUrl = Application::get()->getRequest()->getBaseUrl() . '/' . $this->getPluginPath() . '/styles/sectionFilter.css';
         $templateMgr->addStyleSheet('sectionSearchFilter', $styleUrl, ['contexts' => 'frontend']);
 
-        $templateMgr->assign('sections', $this->loadSections());
+        $templateMgr->assign('sectionsList', $this->loadSections());
         $output .= $templateMgr->fetch($this->getTemplateResource('sectionSearchFilter.tpl'));
 
         return false;
@@ -122,11 +125,11 @@ class AuthorAndSectionSearchFiltersPlugin extends GenericPlugin
         $contextId = Application::get()->getRequest()->getContext()->getId();
         $sections = Repo::section()->getSectionList($contextId, true);
 
-        $sectionsTitles = ['' => ''];
+        $sectionsTitles = [];
         foreach ($sections as $section) {
             $sectionsTitles[$section['id']] = $section['title'];
         }
-
+        asort($sectionsTitles);
         return $sectionsTitles;
     }
 
