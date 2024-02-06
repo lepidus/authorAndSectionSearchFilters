@@ -24,4 +24,15 @@ describe('Section search filter', function () {
         cy.contains('button', 'Search').click();
         cy.get('#sections').contains(expectedSections[0]);
     });
+    it('Search submissions using only the section filter', function () {
+        cy.visit('publicknowledge/search');
+        cy.get('#sections').select(expectedSections[0]);
+        cy.contains('button', 'Search').click();
+        cy.contains("Antimicrobial, heavy metal resistance and plasmid profile of coliforms isolated from nosocomial infections in a hospital in Isfahan, Iran");
+        cy.contains("The Signalling Theory Dividends");
+
+        cy.get('#sections').select(expectedSections[1]);
+        cy.contains('button', 'Search').click();
+        cy.contains('No Results');
+    })
 });

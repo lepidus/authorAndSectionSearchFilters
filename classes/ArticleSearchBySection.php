@@ -48,10 +48,11 @@ class ArticleSearchBySection extends ArticleSearch
                     }
                 }
             } elseif ($sectionId) {
-                // WIP: To be implemented...
-                // Searching using only section as parameter
+                $dao = new SearchBySectionDAO();
+                $mergedResults = $this->assembleMergedResults(
+                    $dao->retrieveSubmissionsBySection($context->getId(), $sectionId, $publishedFrom, $publishedTo)
+                );
             }
-
             $results = $this->getSparseArray($mergedResults, $orderBy, $orderDir, $exclude);
             $totalResults = count($results);
 
@@ -84,5 +85,20 @@ class ArticleSearchBySection extends ArticleSearch
             return true;
         }
         return false;
+    }
+
+    private function assembleMergedResults($results)
+    {
+        $mergedResults = [];
+        foreach ($results as $result) {
+            $submissionId = $result['submissionId'];
+            $mergedResults[$submissionId] = [
+                'count' => 1,
+                'journal_id' => $result['contextId'],
+                'issuePublicationDate' => $result['datePublished'],
+                'publicationDate' => $result['datePublished']
+            ];
+        }
+        return $mergedResults;
     }
 }
