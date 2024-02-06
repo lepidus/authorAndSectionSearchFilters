@@ -1,6 +1,9 @@
 # Author and Section Search Filters Plugin
 
-This plugin adds specific advanced filters to OJS search, giving users the ability to filter by a selected Author from a list of authors that contributed to the journal.
+This plugin adds specific advanced filters to OJS search, giving users the ability to filter by a selected Author from a list of authors that contributed to the journal, and/or within a Section of the journal.
+
+The new filters are added to the search area of the website and are available to all users:
+![](assets/search-area-screenshot.png)
 
 ## Compatibility
 
