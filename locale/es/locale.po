@@ -18,4 +18,4 @@ msgid "plugins.generic.authorAndSectionSearchFilters.description"
 msgstr "Agregar/modificar filtros avanzados por autor y sección en la búsqueda del OJS"
 
 msgid "plugins.generic.authorAndSectionSearchFilters.search.sections"
-msgstr "Por sección"
+msgstr "Por Sección"

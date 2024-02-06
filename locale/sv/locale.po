@@ -18,4 +18,4 @@ msgid "plugins.generic.authorAndSectionSearchFilters.description"
 msgstr "Lägger till/ändrar avancerade filter efter författare och avsnitt i OJS-sökningen"
 
 msgid "plugins.generic.authorAndSectionSearchFilters.search.sections"
-msgstr "Efter avsnitt"
+msgstr "Efter Avsnitt"
