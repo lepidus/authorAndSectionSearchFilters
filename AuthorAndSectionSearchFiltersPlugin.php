@@ -9,6 +9,7 @@ use APP\facades\Repo;
 use PKP\security\Role;
 use APP\template\TemplateManager;
 use APP\submission\Submission;
+use APP\plugins\generic\authorAndSectionSearchFilters\classes\SearchBySectionDAO;
 
 class AuthorAndSectionSearchFiltersPlugin extends GenericPlugin
 {
@@ -95,14 +96,16 @@ class AuthorAndSectionSearchFiltersPlugin extends GenericPlugin
             $fullName = $author->getFullName();
 
             if (!isset($authorNames[$fullName])) {
-                $publication = Repo::publication()->get($author->getData('publicationId'));
+                $dao = new SearchBySectionDAO();
+                $publicationId = $author->getData('publicationId');
 
-                if ($publication->getData('status') == Submission::STATUS_PUBLISHED) {
-                    $authorNames[$fullName] = $fullName;
+                if ($dao->publicationIsPublished($publicationId)) {
+                    $authorNames[$fullName] = $author->getLocalizedFamilyName() . ' ' . $author->getLocalizedGivenName();
                 }
             }
         }
-        ksort($authorNames);
+        asort($authorNames);
+        $authorNames = array_combine(array_keys($authorNames), array_keys($authorNames));
         return $authorNames;
     }
 
