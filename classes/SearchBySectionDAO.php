@@ -57,4 +57,15 @@ class SearchBySectionDAO extends DAO
 
         return $submissions;
     }
+
+    public function publicationIsPublished(int $publicationId): bool
+    {
+        $result = DB::table('publications')
+            ->where('publication_id', $publicationId)
+            ->select('status')
+            ->first();
+        $status = get_object_vars($result)['status'];
+
+        return $status == Submission::STATUS_PUBLISHED;
+    }
 }

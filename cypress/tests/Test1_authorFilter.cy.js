@@ -1,6 +1,6 @@
 describe('Author search filter replacement', function () {
     const expectedAuthorsCount = 4;
-    const expectedAuthors = ["Vajiheh Karbasizaed", "Alan Mwandenga"];
+    const expectedAuthors = ["Vajiheh Karbasizaed", "Amina Mansour", "Alan Mwandenga", "Nicolas Riouf"];
 
     it('Field should be a dropdown list of authors', function () {
         cy.visit('publicknowledge/search');
@@ -26,5 +26,11 @@ describe('Author search filter replacement', function () {
         cy.get('#authors').select(expectedAuthors[0]);
         cy.contains('button', 'Search').click();
         cy.get('#authors').should('have.value', expectedAuthors[0]);
+    });
+    it('The authors list should be ordered alphbetically by last name', function () {
+        cy.visit('publicknowledge/search');
+        cy.get('#authors').children().eq(1).should('have.text', expectedAuthors[0]);
+        cy.get('#authors').children().eq(2).should('have.text', expectedAuthors[1]);
+        cy.get('#authors').children().eq(3).should('have.text', expectedAuthors[2]);
     });
 });
