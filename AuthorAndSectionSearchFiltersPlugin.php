@@ -100,12 +100,11 @@ class AuthorAndSectionSearchFiltersPlugin extends GenericPlugin
                 $publicationId = $author->getData('publicationId');
 
                 if ($dao->publicationIsPublished($publicationId)) {
-                    $authorNames[$fullName] = $author->getLocalizedFamilyName() . ' ' . $author->getLocalizedGivenName();
+                    $authorNames[$fullName] = $author->getLocalizedFamilyName() . ', ' . $author->getLocalizedGivenName();
                 }
             }
         }
         asort($authorNames);
-        $authorNames = array_combine(array_keys($authorNames), array_keys($authorNames));
         return $authorNames;
     }
 
