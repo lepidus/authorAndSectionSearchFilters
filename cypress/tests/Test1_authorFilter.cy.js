@@ -6,7 +6,10 @@ describe('Author search filter replacement', function () {
     it('Field should be a dropdown list of authors', function () {
         cy.visit('publicknowledge/search');
         cy.get('#authors').should('be.visible').and('have.prop', 'tagName', 'SELECT');
+
         cy.get('#authors').should('have.value', '');
+        cy.get('#authors').children().eq(0).should('have.text', 'None selected');
+
         cy.get('#authors').children().should('have.length', expectedAuthorsCount + 1);
         cy.contains('#authors option', expectedAuthorsNamesInSelection[0]);
         cy.contains('#authors option', expectedAuthorsNamesInSelection[1]);
@@ -17,7 +20,7 @@ describe('Author search filter replacement', function () {
         cy.get('#authors').select(expectedAuthorsNamesInSelection[0]);
         cy.contains('button', 'Search').click();
         cy.contains("Antimicrobial, heavy metal resistance and plasmid profile of coliforms isolated from nosocomial infections in a hospital in Isfahan, Iran");
-        
+
         cy.get('#authors').select(expectedAuthors[1]);
         cy.contains('button', 'Search').click();
         cy.contains("The Signalling Theory Dividends");

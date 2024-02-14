@@ -19,3 +19,6 @@ msgstr "Adiciona/modifica filtros avançados por autor e por seção na busca do
 
 msgid "plugins.generic.authorAndSectionSearchFilters.search.sections"
 msgstr "Por Seção"
+
+msgid "plugins.generic.authorAndSectionSearchFilters.search.noneSelected"
+msgstr "Nada selecionado"

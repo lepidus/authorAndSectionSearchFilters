@@ -19,3 +19,6 @@ msgstr "Lägger till/ändrar avancerade filter efter författare och avsnitt i O
 
 msgid "plugins.generic.authorAndSectionSearchFilters.search.sections"
 msgstr "Efter Avsnitt"
+
+msgid "plugins.generic.authorAndSectionSearchFilters.search.noneSelected"
+msgstr "Ingen vald"
