@@ -4,7 +4,6 @@ describe('Plugin setup of Author and Section Search Filters Plugin', function ()
 
 		cy.contains('a', 'Website').click();
 
-		cy.waitJQuery();
 		cy.get('#plugins-button').click();
 
 		cy.get('input[id^=select-cell-authorandsectionsearchfiltersplugin]').check();
