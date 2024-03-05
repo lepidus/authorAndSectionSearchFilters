@@ -24,6 +24,12 @@ Under Upload file select the file `authorAndSectionSearchFilters.tar.gz`.
 
 Click Save and the plugin will be installed on your website.
 
+## Credits
+
+This plugin was conceived and sponsored by [Nordicbysight](https://nordicbysight.se/).
+
+Developed by [Lepidus Tecnologia](https://github.com/lepidus).
+
 ## License
 
 This plugin is licensed under the GNU General Public License v3.0
