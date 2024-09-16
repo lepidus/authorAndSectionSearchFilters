@@ -60,7 +60,11 @@ class AuthorAndSectionSearchFiltersPlugin extends GenericPlugin
 
     public function replaceAuthorsInputFieldFilter($output, $templateMgr): string
     {
+        $context = Application::get()->getRequest()->getContext();
         $pattern = '/<input type="text".*name="authors" [^>]+>/';
+        error_log($context->getData('themePluginPath'));
+        $templateName = $context->getData('themePluginPath') == "classic" ?
+            'newAuthorsFilterClassicTheme.tpl' : 'newAuthorsFilter.tpl';
 
         if (preg_match($pattern, $output, $matches, PREG_OFFSET_CAPTURE)) {
             $match = $matches[0][0];
@@ -68,7 +72,7 @@ class AuthorAndSectionSearchFiltersPlugin extends GenericPlugin
 
             $templateMgr->assign('authorsList', $this->loadAuthors());
             $newOutput = substr($output, 0, $offset);
-            $newOutput .= $templateMgr->fetch($this->getTemplateResource('newAuthorsFilter.tpl'));
+            $newOutput .= $templateMgr->fetch($this->getTemplateResource($templateName));
             $newOutput .= substr($output, $offset + strlen($match));
             $output = $newOutput;
 
