@@ -62,7 +62,6 @@ class AuthorAndSectionSearchFiltersPlugin extends GenericPlugin
     {
         $context = Application::get()->getRequest()->getContext();
         $pattern = '/<input type="text".*name="authors" [^>]+>/';
-        error_log($context->getData('themePluginPath'));
         $templateName = $context->getData('themePluginPath') == "classic" ?
             'newAuthorsFilterClassicTheme.tpl' : 'newAuthorsFilter.tpl';
 
@@ -121,7 +120,12 @@ class AuthorAndSectionSearchFiltersPlugin extends GenericPlugin
         $templateMgr->addStyleSheet('sectionSearchFilter', $styleUrl, ['contexts' => 'frontend']);
 
         $templateMgr->assign('sectionsList', $this->loadSections());
-        $output .= $templateMgr->fetch($this->getTemplateResource('sectionSearchFilter.tpl'));
+
+        $context = Application::get()->getRequest()->getContext();
+        $templateName = $context->getData('themePluginPath') == "classic" ?
+            'sectionSearchFilterClassicTheme.tpl' : 'sectionSearchFilter.tpl';
+
+        $output .= $templateMgr->fetch($this->getTemplateResource($templateName));
 
         return false;
     }
