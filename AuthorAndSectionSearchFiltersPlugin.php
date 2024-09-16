@@ -60,7 +60,7 @@ class AuthorAndSectionSearchFiltersPlugin extends GenericPlugin
 
     public function replaceAuthorsInputFieldFilter($output, $templateMgr): string
     {
-        $pattern = '/<input type="text" id="authors" [^>]+>/';
+        $pattern = '/<input type="text".*name="authors" [^>]+>/';
 
         if (preg_match($pattern, $output, $matches, PREG_OFFSET_CAPTURE)) {
             $match = $matches[0][0];
