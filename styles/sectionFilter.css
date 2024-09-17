@@ -13,3 +13,7 @@
         margin-top: 1.43rem;
     }
 }
+
+#authorsClassicTheme, #sectionsClassicTheme {
+    width: -webkit-fill-available;
+}

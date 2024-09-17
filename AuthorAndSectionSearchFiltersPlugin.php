@@ -60,7 +60,10 @@ class AuthorAndSectionSearchFiltersPlugin extends GenericPlugin
 
     public function replaceAuthorsInputFieldFilter($output, $templateMgr): string
     {
-        $pattern = '/<input type="text" id="authors" [^>]+>/';
+        $context = Application::get()->getRequest()->getContext();
+        $pattern = '/<input type="text".*name="authors" [^>]+>/';
+        $templateName = $context->getData('themePluginPath') == "classic" ?
+            'newAuthorsFilterClassicTheme.tpl' : 'newAuthorsFilter.tpl';
 
         if (preg_match($pattern, $output, $matches, PREG_OFFSET_CAPTURE)) {
             $match = $matches[0][0];
@@ -68,7 +71,7 @@ class AuthorAndSectionSearchFiltersPlugin extends GenericPlugin
 
             $templateMgr->assign('authorsList', $this->loadAuthors());
             $newOutput = substr($output, 0, $offset);
-            $newOutput .= $templateMgr->fetch($this->getTemplateResource('newAuthorsFilter.tpl'));
+            $newOutput .= $templateMgr->fetch($this->getTemplateResource($templateName));
             $newOutput .= substr($output, $offset + strlen($match));
             $output = $newOutput;
 
@@ -117,7 +120,12 @@ class AuthorAndSectionSearchFiltersPlugin extends GenericPlugin
         $templateMgr->addStyleSheet('sectionSearchFilter', $styleUrl, ['contexts' => 'frontend']);
 
         $templateMgr->assign('sectionsList', $this->loadSections());
-        $output .= $templateMgr->fetch($this->getTemplateResource('sectionSearchFilter.tpl'));
+
+        $context = Application::get()->getRequest()->getContext();
+        $templateName = $context->getData('themePluginPath') == "classic" ?
+            'sectionSearchFilterClassicTheme.tpl' : 'sectionSearchFilter.tpl';
+
+        $output .= $templateMgr->fetch($this->getTemplateResource($templateName));
 
         return false;
     }
