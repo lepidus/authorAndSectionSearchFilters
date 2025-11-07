@@ -3,9 +3,9 @@
 namespace APP\plugins\generic\authorAndSectionSearchFilters\classes;
 
 use APP\template\TemplateManager;
-use APP\facades\Repo;
 use APP\pages\search\SearchHandler;
 use APP\plugins\generic\authorAndSectionSearchFilters\classes\ArticleSearchBySection;
+use PKP\userGroup\UserGroup;
 
 class SectionFilterSearchHandler extends SearchHandler
 {
@@ -50,10 +50,9 @@ class SectionFilterSearchHandler extends SearchHandler
             'simDocsEnabled' => true,
             'results' => $results,
             'error' => $error,
-            'authorUserGroups' => Repo::userGroup()->getCollector()
-                ->filterByRoleIds([\PKP\security\Role::ROLE_ID_AUTHOR])
-                ->filterByContextIds($searchFilters['searchJournal'] ? [$searchFilters['searchJournal']->getId()] : null)
-                ->getMany()->remember(),
+            'authorUserGroups' => UserGroup::withRoleIds([\PKP\security\Role::ROLE_ID_AUTHOR])
+                ->withContextIds($searchFilters['searchJournal'] ? [$searchFilters['searchJournal']->getId()] : null)
+                ->get(),
             'searchResultOrderOptions' => $articleSearch->getResultSetOrderingOptions($request),
             'searchResultOrderDirOptions' => $articleSearch->getResultSetOrderingDirectionOptions(),
         ]);
