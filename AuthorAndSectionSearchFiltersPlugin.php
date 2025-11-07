@@ -145,9 +145,11 @@ class AuthorAndSectionSearchFiltersPlugin extends GenericPlugin
 
     public function replaceSearchHandler($hookName, $params)
     {
-        $page = $params[0];
+        $page = &$params[0];
+        $handler = &$params[3];
+
         if ($page === 'search') {
-            define('HANDLER_CLASS', 'APP\plugins\generic\authorAndSectionSearchFilters\classes\SectionFilterSearchHandler');
+            $handler = new classes\SectionFilterSearchHandler();
             return true;
         }
         return false;
