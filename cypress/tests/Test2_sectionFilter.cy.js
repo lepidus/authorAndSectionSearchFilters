@@ -3,7 +3,7 @@ describe('Section search filter', function () {
     const expectedSections = ["Articles", "Reviews"];
 
     it('New field should be a dropdown list of sections', function () {
-        cy.visit('publicknowledge/search');
+        cy.visit('index.php/publicknowledge/en/search');
         cy.get('#sections').should('be.visible').and('have.prop', 'tagName', 'SELECT');
 
         cy.get('#sections').should('have.value', '');
@@ -14,7 +14,7 @@ describe('Section search filter', function () {
         cy.contains('#sections option', expectedSections[1]);
     });
     it('Search submissions using the section AND author filter', function () {
-        cy.visit('publicknowledge/search');
+        cy.visit('index.php/publicknowledge/en/search');
         cy.get('#sections').select(expectedSections[0]);
         cy.get('#authors').select("Alan Mwandenga");
 
@@ -22,13 +22,13 @@ describe('Section search filter', function () {
         cy.contains("The Signalling Theory Dividends");
     });
     it('Keep the value of the filter after search', function () {
-        cy.visit('publicknowledge/search');
+        cy.visit('index.php/publicknowledge/en/search');
         cy.get('#sections').select(expectedSections[0]);
         cy.contains('button', 'Search').click();
         cy.get('#sections').contains(expectedSections[0]);
     });
     it('Search submissions using only the section filter', function () {
-        cy.visit('publicknowledge/search');
+        cy.visit('index.php/publicknowledge/en/search');
         cy.get('#sections').select(expectedSections[0]);
         cy.contains('button', 'Search').click();
         cy.contains("Antimicrobial, heavy metal resistance and plasmid profile of coliforms isolated from nosocomial infections in a hospital in Isfahan, Iran");
