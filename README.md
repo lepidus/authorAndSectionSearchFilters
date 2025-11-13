@@ -9,7 +9,7 @@ The new filters are added to the search area of the website and are available to
 
 The latest release of this plugin is compatible with the following PKP applications:
 
-OJS 3.4.0
+OJS 3.4.0 and 3.5.0
 
 ## Plugin Download
 
