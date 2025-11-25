@@ -7,9 +7,16 @@ The new filters are added to the search area of the website and are available to
 
 ## Compatibility
 
-The latest release of this plugin is compatible with the following PKP applications:
+The main branch of this repository is compatible with OJS 3.5.0.x.
 
-OJS 3.4.0 and 3.5.0
+A version compatible with OJS 3.4.0.x is available in the [stable-3_4_0](https://github.com/lepidus/authorAndSectionSearchFilters/tree/stable-3_4_0 ) branch.
+
+
+* Plugin version v1.x.x.x is compatible with OJS 3.4.0.x
+* Plugin version v2.x.x.x is compatible with OJS 3.5.0.x
+
+You can find the latest version of the plugin compatible with your OJS version in the [Releases page](https://github.com/lepidus/authorAndSectionSearchFilters/releases).
+
 
 ## Plugin Download
 
